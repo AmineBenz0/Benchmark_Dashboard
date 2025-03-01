@@ -9,7 +9,7 @@ st.set_page_config(page_title="Model Metrics Dashboard", layout="wide")
 # Load the aggregated data
 @st.cache_data  # Cache the data for better performance
 def load_data():
-    with open("results/aggregated_metrics.json", "r") as f:
+    with open("aggregated_metrics.json", "r") as f:
         data = json.load(f)
     return pd.DataFrame(data)
 
