@@ -15,11 +15,15 @@ def load_data():
 
 df = load_data()
 
-# Extract unique models from the dataset
+# Extract unique models
 unique_models = df["model"].unique()
 
+# Exclude non-numeric columns before aggregation
+numeric_columns = ["correctness", "relevance", "rouge", "bleu", "perplexity", "resolution_time",
+                   "combined_score", "cpu_%", "ram_%", "gpu_%", "gpu_mem_%"]
+
 # Compute mean metrics per model
-aggregated_metrics = df.groupby("model").mean().reset_index()
+aggregated_metrics = df.groupby("model")[numeric_columns].mean().reset_index()
 
 # Page title
 st.title("Model Metrics Dashboard")
@@ -36,52 +40,27 @@ st.header("Performance Metrics")
 
 # Correctness (Higher is better)
 st.subheader("Correctness (Higher is better)")
-fig1 = px.bar(
-    filtered_df,
-    x="model",
-    y="correctness",
-    title="Correctness Comparison"
-)
+fig1 = px.bar(filtered_df, x="model", y="correctness", title="Correctness Comparison")
 st.plotly_chart(fig1, use_container_width=True)
 
 # Relevance (Higher is better)
 st.subheader("Relevance (Higher is better)")
-fig2 = px.bar(
-    filtered_df,
-    x="model",
-    y="relevance",
-    title="Relevance Comparison"
-)
+fig2 = px.bar(filtered_df, x="model", y="relevance", title="Relevance Comparison")
 st.plotly_chart(fig2, use_container_width=True)
 
 # ROUGE (Higher is better)
 st.subheader("ROUGE (Higher is better)")
-fig3 = px.bar(
-    filtered_df,
-    x="model",
-    y="rouge",
-    title="ROUGE Comparison"
-)
+fig3 = px.bar(filtered_df, x="model", y="rouge", title="ROUGE Comparison")
 st.plotly_chart(fig3, use_container_width=True)
 
 # BLEU (Higher is better)
 st.subheader("BLEU (Higher is better)")
-fig4 = px.bar(
-    filtered_df,
-    x="model",
-    y="bleu",
-    title="BLEU Comparison"
-)
+fig4 = px.bar(filtered_df, x="model", y="bleu", title="BLEU Comparison")
 st.plotly_chart(fig4, use_container_width=True)
 
 # Combined Score (Higher is better)
 st.subheader("Combined Score (Higher is better)")
-fig5 = px.bar(
-    filtered_df,
-    x="model",
-    y="combined_score",
-    title="Combined Score Comparison"
-)
+fig5 = px.bar(filtered_df, x="model", y="combined_score", title="Combined Score Comparison")
 st.plotly_chart(fig5, use_container_width=True)
 
 # ========================== EFFICIENCY METRICS ==========================
@@ -89,24 +68,12 @@ st.header("Efficiency Metrics")
 
 # Resolution Time (Lower is better)
 st.subheader("Resolution Time (Lower is better)")
-fig6 = px.bar(
-    filtered_df,
-    x="model",
-    y="resolution_time",
-    title="Resolution Time Comparison",
-    labels={"resolution_time": "Resolution Time (s)"}
-)
+fig6 = px.bar(filtered_df, x="model", y="resolution_time", title="Resolution Time Comparison")
 st.plotly_chart(fig6, use_container_width=True)
 
 # Perplexity (Lower is better)
 st.subheader("Perplexity (Lower is better)")
-fig7 = px.bar(
-    filtered_df,
-    x="model",
-    y="perplexity",
-    title="Perplexity Comparison",
-    labels={"perplexity": "Perplexity"}
-)
+fig7 = px.bar(filtered_df, x="model", y="perplexity", title="Perplexity Comparison")
 st.plotly_chart(fig7, use_container_width=True)
 
 # ========================== RESOURCE USAGE METRICS ==========================
@@ -128,7 +95,7 @@ st.header("📜 Model Responses Showcase")
 # Dropdown to select a single model for detailed response view
 selected_model = st.selectbox("Select a model to view responses:", unique_models)
 
-# Extract queries corresponding to the selected model
+# Extract relevant responses for the selected model
 model_queries = df[df["model"] == selected_model][["query", "context", "final_answer"]]
 
 # Display Table with Query, Context, and Response
