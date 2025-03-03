@@ -7,7 +7,7 @@ import json
 st.set_page_config(page_title="Model Metrics Dashboard", layout="wide")
 
 # Load the aggregated data
-@st.cache_data  # Cache the data for better performance
+@st.cache_data
 def load_data():
     with open("aggregated_metrics.json", "r") as f:
         data = json.load(f)
@@ -15,15 +15,21 @@ def load_data():
 
 df = load_data()
 
+# Extract unique models from the dataset
+unique_models = df["model"].unique()
+
+# Compute mean metrics per model
+aggregated_metrics = df.groupby("model").mean().reset_index()
+
 # Page title
 st.title("Model Metrics Dashboard")
 
 # Add a sidebar for filters
 st.sidebar.header("Filters")
-selected_models = st.sidebar.multiselect("Select models", df["model"].unique(), default=df["model"].unique())
+selected_models = st.sidebar.multiselect("Select models", unique_models, default=unique_models)
 
-# Filter the data based on selected models
-filtered_df = df[df["model"].isin(selected_models)]
+# Filter data based on selected models
+filtered_df = aggregated_metrics[aggregated_metrics["model"].isin(selected_models)]
 
 # ========================== PERFORMANCE METRICS ==========================
 st.header("Performance Metrics")
@@ -105,7 +111,7 @@ st.plotly_chart(fig7, use_container_width=True)
 
 # ========================== RESOURCE USAGE METRICS ==========================
 st.header("Resource Usage Metrics")
-resource_metrics = ["cpu_%", "ram_%", "gpu_%", "gpu_mem_%"]
+resource_metrics = ["cpu_%", "ram_%", "gpu_mem_%"]
 fig8 = px.bar(
     filtered_df.melt(id_vars=["model"], value_vars=resource_metrics, var_name="Metric", value_name="Percentage"),
     x="model",
@@ -115,6 +121,19 @@ fig8 = px.bar(
     title="Resource Usage Comparison"
 )
 st.plotly_chart(fig8, use_container_width=True)
+
+# ========================== SHOW INPUT, CONTEXT, AND OUTPUT ==========================
+st.header("📜 Model Responses Showcase")
+
+# Dropdown to select a single model for detailed response view
+selected_model = st.selectbox("Select a model to view responses:", unique_models)
+
+# Extract queries corresponding to the selected model
+model_queries = df[df["model"] == selected_model][["query", "context", "final_answer"]]
+
+# Display Table with Query, Context, and Response
+st.subheader(f"Responses for Model: {selected_model}")
+st.dataframe(model_queries)
 
 # ========================== SUMMARY TABLE ==========================
 st.header("Summary Table")
