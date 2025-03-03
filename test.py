@@ -105,7 +105,7 @@ st.plotly_chart(fig7, use_container_width=True)
 
 # ========================== RESOURCE USAGE METRICS ==========================
 st.header("Resource Usage Metrics")
-resource_metrics = ["cpu_%", "ram_%", "gpu_mem_%"]
+resource_metrics = ["cpu_%", "ram_%", "gpu_%", "gpu_mem_%"]
 fig8 = px.bar(
     filtered_df.melt(id_vars=["model"], value_vars=resource_metrics, var_name="Metric", value_name="Percentage"),
     x="model",
@@ -115,29 +115,6 @@ fig8 = px.bar(
     title="Resource Usage Comparison"
 )
 st.plotly_chart(fig8, use_container_width=True)
-
-# ========================== SHOW INPUT, CONTEXT, AND OUTPUT ==========================
-st.header("📜 Model Responses Showcase")
-
-# Dropdown to select a single model for detailed response view
-selected_model = st.selectbox("Select a model to view responses:", df["model"].unique())
-
-# Extract the relevant data
-with open("aggregated_metrics.json", "r") as f:
-    data = json.load(f)
-
-# Find the responses of the selected model
-model_data = next((entry for entry in data if entry["model"] == selected_model), None)
-
-if model_data and "queries" in model_data:
-    # Convert query data to a DataFrame
-    queries_df = pd.DataFrame(model_data["queries"])
-    
-    # Display Table with Query, Context, and Response
-    st.subheader(f"Model: {selected_model}")
-    st.dataframe(queries_df)
-else:
-    st.warning("No response data available for this model.")
 
 # ========================== SUMMARY TABLE ==========================
 st.header("Summary Table")
