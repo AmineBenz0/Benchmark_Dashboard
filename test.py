@@ -25,7 +25,7 @@ selected_models = st.sidebar.multiselect("Select models", df["model"].unique(), 
 # Filter the data based on selected models
 filtered_df = df[df["model"].isin(selected_models)]
 
-# Performance Metrics Section
+# ========================== PERFORMANCE METRICS ==========================
 st.header("Performance Metrics")
 
 # Correctness (Higher is better)
@@ -78,7 +78,7 @@ fig5 = px.bar(
 )
 st.plotly_chart(fig5, use_container_width=True)
 
-# Efficiency Metrics Section
+# ========================== EFFICIENCY METRICS ==========================
 st.header("Efficiency Metrics")
 
 # Resolution Time (Lower is better)
@@ -103,7 +103,7 @@ fig7 = px.bar(
 )
 st.plotly_chart(fig7, use_container_width=True)
 
-# Resource Usage Metrics Section
+# ========================== RESOURCE USAGE METRICS ==========================
 st.header("Resource Usage Metrics")
 resource_metrics = ["cpu_%", "ram_%", "gpu_mem_%"]
 fig8 = px.bar(
@@ -116,6 +116,29 @@ fig8 = px.bar(
 )
 st.plotly_chart(fig8, use_container_width=True)
 
-# Add a table as a summary
+# ========================== SHOW INPUT, CONTEXT, AND OUTPUT ==========================
+st.header("📜 Model Responses Showcase")
+
+# Dropdown to select a single model for detailed response view
+selected_model = st.selectbox("Select a model to view responses:", df["model"].unique())
+
+# Extract the relevant data
+with open("aggregated_metrics.json", "r") as f:
+    data = json.load(f)
+
+# Find the responses of the selected model
+model_data = next((entry for entry in data if entry["model"] == selected_model), None)
+
+if model_data and "queries" in model_data:
+    # Convert query data to a DataFrame
+    queries_df = pd.DataFrame(model_data["queries"])
+    
+    # Display Table with Query, Context, and Response
+    st.subheader(f"Model: {selected_model}")
+    st.dataframe(queries_df)
+else:
+    st.warning("No response data available for this model.")
+
+# ========================== SUMMARY TABLE ==========================
 st.header("Summary Table")
 st.table(filtered_df)
