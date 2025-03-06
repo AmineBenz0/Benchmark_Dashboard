@@ -1,0 +1,33 @@
+{
+    "correctness": 0.957189604640007,
+    "relevance": 0.9387034624814987,
+    "perplexity": 1.0033716559410095,
+    "resolution_time": 0.6011262536048889,
+    "combined_score": 0.956722455471754,
+    "cpu_%": 43.475,
+    "ram_%": 35.1,
+    "gpu_%": 0.0,
+    "gpu_mem_%": 28.753294335793957,
+    "queries": [
+        {
+            "query": "What is your policy on returns?",
+            "context": "- Our return policy allows you to return products within 30 days of purchase for a full refund, provided they are in their original condition and packaging. Please refer to our Returns page for detailed instructions.\n\n- A receipt or proof of purchase is usually required for returns. Please refer to our return policy or contact our customer support team for assistance.\n\n- Yes, you can return a product purchased during a sale or with a discount. The refund will be processed based on the amount paid after the discount.",
+            "final_answer": "Our return policy allows you to return products within 30 days of purchase for a full refund, provided they are in their original condition and packaging. You will need a receipt or proof of purchase for the return. You can also return items purchased during a sale or with a discount, and the refund will be based on the amount paid after the discount. For detailed instructions, please visit our Returns page or contact our customer support team for assistance."
+        },
+        {
+            "query": "How much time does it take for shipping?",
+            "context": "- Shipping times vary depending on the destination and the shipping method chosen. Standard shipping usually takes 3-5 business days, while express shipping can take 1-2 business days.\n\n- Yes, we offer expedited shipping options for faster delivery. During the checkout process, you can select the desired expedited shipping method.\n\n- Yes, we offer international shipping to select countries. The availability and shipping costs will be calculated during the checkout process based on your location.",
+            "final_answer": "The time it takes for shipping depends on your chosen method. Standard shipping typically takes 3-5 business days, while express shipping can be as fast as 1-2 business days. If you need your order to arrive sooner than standard shipping allows, you can select expedited shipping options during the checkout process."
+        },
+        {
+            "query": "Is it possible to cancel an order after placing it?",
+            "context": "- You can cancel your order if it has not been shipped yet. Please contact our customer support team with your order details, and we will assist you with the cancellation process.\n\n- If you need to change or cancel an item in your order, please contact our customer support team as soon as possible. We will assist you with the necessary steps.\n\n- Yes, an invoice is usually included with your order. If you require a separate invoice, please contact our customer support team with your order details.",
+            "final_answer": "Yes, you can cancel your order if it has not been shipped yet. Please contact our customer support team with your order details, and we will assist you with the cancellation process."
+        },
+        {
+            "query": "Can I request gift wrapping for my order?",
+            "context": "- Yes, you can add a gift message during the checkout process. There is usually a section where you can enter your personalized message.\n\n- Yes, we offer gift wrapping services for an additional fee. During the checkout process, you can select the option to add gift wrapping to your order.\n\n- Yes, you can order a product as a gift and have it shipped directly to the recipient. During the checkout process, you can enter the recipient's shipping address.",
+            "final_answer": "Yes, you can request gift wrapping for your order. During the checkout process, you will see an option to add gift wrapping to your order for an additional fee."
+        }
+    ]
+}

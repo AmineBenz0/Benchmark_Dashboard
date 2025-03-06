@@ -1,0 +1,33 @@
+{
+    "correctness": 0.931531697511673,
+    "relevance": 0.8839595466852188,
+    "perplexity": 1.0013544857501984,
+    "resolution_time": 8.732783496379852,
+    "combined_score": 0.9229762554168701,
+    "cpu_%": 51.025,
+    "ram_%": 42.525,
+    "gpu_%": 0.0,
+    "gpu_mem_%": 44.26964828318204,
+    "queries": [
+        {
+            "query": "What is your policy on returns?",
+            "context": "- Our return policy allows you to return products within 30 days of purchase for a full refund, provided they are in their original condition and packaging. Please refer to our Returns page for detailed instructions.\n\n- A receipt or proof of purchase is usually required for returns. Please refer to our return policy or contact our customer support team for assistance.\n\n- Yes, you can return a product purchased during a sale or with a discount. The refund will be processed based on the amount paid after the discount.",
+            "final_answer": "Our return policy allows you to return products within 30 days of purchase for a full refund, provided the items are in their original condition and packaging. Please ensure you have a receipt or proof of purchase ready when returning an item. The process is straightforward: simply visit our Returns page, follow the instructions, and pack your item carefully. If you've made a purchase during a sale or with a discount, don't worry - you can still return it. We'll refund you based on the amount paid after any applicable discounts have been applied. If you need further clarification or assistance, please don't hesitate to contact our customer support team."
+        },
+        {
+            "query": "How much time does it take for shipping?",
+            "context": "- Shipping times vary depending on the destination and the shipping method chosen. Standard shipping usually takes 3-5 business days, while express shipping can take 1-2 business days.\n\n- Yes, we offer expedited shipping options for faster delivery. During the checkout process, you can select the desired expedited shipping method.\n\n- Yes, we offer international shipping to select countries. The availability and shipping costs will be calculated during the checkout process based on your location.",
+            "final_answer": "Shipping times at our company vary depending on the destination and the shipping method chosen. For standard shipping, which is our default option, delivery typically takes 3-5 business days. If you opt for express shipping, your package can arrive within 1-2 business days. Please note that these timeframes are estimates and may be affected by factors such as holidays or extreme weather conditions. If you have any other questions about the shipping process, feel free to ask!"
+        },
+        {
+            "query": "Is it possible to cancel an order after placing it?",
+            "context": "- You can cancel your order if it has not been shipped yet. Please contact our customer support team with your order details, and we will assist you with the cancellation process.\n\n- If you need to change or cancel an item in your order, please contact our customer support team as soon as possible. We will assist you with the necessary steps.\n\n- Yes, an invoice is usually included with your order. If you require a separate invoice, please contact our customer support team with your order details.",
+            "final_answer": "Yes, it is possible to cancel an order after placing it as long as the order has not been shipped yet. If you need to cancel your order, please contact our customer support team with your order details so we can assist you with the cancellation process."
+        },
+        {
+            "query": "Can I request gift wrapping for my order?",
+            "context": "- Yes, you can add a gift message during the checkout process. There is usually a section where you can enter your personalized message.\n\n- Yes, we offer gift wrapping services for an additional fee. During the checkout process, you can select the option to add gift wrapping to your order.\n\n- Yes, you can order a product as a gift and have it shipped directly to the recipient. During the checkout process, you can enter the recipient's shipping address.",
+            "final_answer": "Yes, you can request gift wrapping for your order. During the checkout process, look for an option to add gift wrapping to your purchase. This service allows you to have your items beautifully wrapped, adding a special touch to your gifts. Remember, there might be an additional fee for this service."
+        }
+    ]
+}
