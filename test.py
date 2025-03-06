@@ -23,8 +23,8 @@ def load_data_from_folder(folder_path):
                 combined_score = (
                     model_data["correctness"] * 0.4 +  # Correctness weight
                     model_data["relevance"] * 0.3 +    # Relevance weight
-                    inverted_perplexity * 0.2 -        # Perplexity weight (inverted)
-                    model_data["resolution_time"] * 0.1 -  # Resolution time weight
+                    inverted_perplexity * (-0.2)        # Perplexity weight (inverted)
+                    model_data["resolution_time"] * (-0.1)   # Resolution time weight
                 )
                 # Extract metrics
                 metrics = {
