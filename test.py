@@ -8,24 +8,47 @@ import os
 st.set_page_config(page_title="LLM Metrics Dashboard", layout="wide")
 
 # Load the aggregated data from a folder
+def normalize_metric(value, min_value, max_value):
+    """Normalize a metric to the range [0, 1]."""
+    return (value - min_value) / (max_value - min_value)
+
 @st.cache_data
 def load_data_from_folder(folder_path):
     metrics_data = []
     queries_data = []
+    # Define expected ranges for normalization
+    correctness_range = (0.0, 1.0)        # Correctness is already between 0 and 1
+    relevance_range = (0.0, 1.0)          # Relevance is already between 0 and 1
+    perplexity_range = (1.0, 10.0)        # Example range for perplexity
+    resolution_time_range = (0.5, 5.0)    # Example range for resolution time
+
     for filename in os.listdir(folder_path):
         if filename.endswith(".json"):
             model_name = filename.replace("_aggregated_results.json", "")
             with open(os.path.join(folder_path, filename), "r") as f:
                 model_data = json.load(f)
-                # Invert perplexity to make lower values better
+                # Normalize metrics
+                correctness = normalize_metric(model_data["correctness"], *correctness_range)
+                relevance = normalize_metric(model_data["relevance"], *relevance_range)
                 inverted_perplexity = 1 / model_data["perplexity"]
-                # Update combined_score with negative weight for perplexity
+                perplexity = normalize_metric(inverted_perplexity, 1 / perplexity_range[1], 1 / perplexity_range[0])
+                resolution_time = normalize_metric(model_data["resolution_time"], *resolution_time_range)
+                # Weights for combined_score
+                weights = {
+                    "correctness": 0.4,
+                    "relevance": 0.3,
+                    "perplexity": 0.2,
+                    "resolution_time": 0.1,
+                }
+                # Calculate combined_score (ensures it stays within [0, 1])
                 combined_score = (
-                    model_data["correctness"] * 0.4 +  # Correctness weight
-                    model_data["relevance"] * 0.3 +    # Relevance weight
-                    inverted_perplexity * 0.2 -       # Perplexity weight (inverted)
-                    model_data["resolution_time"] * 0.1   # Resolution time weight
+                    correctness * weights["correctness"] +
+                    relevance * weights["relevance"] +
+                    perplexity * weights["perplexity"] -
+                    resolution_time * weights["resolution_time"]
                 )
+                # Ensure combined_score doesn't drop below 0
+                combined_score = max(0, combined_score)
                 # Extract metrics
                 metrics = {
                     "model": model_name,
@@ -33,7 +56,7 @@ def load_data_from_folder(folder_path):
                     "relevance": model_data["relevance"],
                     "perplexity": model_data["perplexity"],
                     "resolution_time": model_data["resolution_time"],
-                    "combined_score": combined_score,  # Updated combined_score
+                    "combined_score": combined_score,
                     "cpu_%": model_data["cpu_%"],
                     "ram_%": model_data["ram_%"],
                     "gpu_%": model_data["gpu_%"],
