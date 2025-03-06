@@ -18,7 +18,10 @@ def load_data_from_folder(folder_path):
                 model_data = json.load(f)
                 # Add model name to the data
                 model_data["model"] = model_name
-                all_data.append(model_data)
+                # Flatten the 'queries' list
+                for query in model_data["queries"]:
+                    query["model"] = model_name
+                    all_data.append(query)
     return pd.DataFrame(all_data)
 
 # Extract metrics for a given dataframe
@@ -111,10 +114,10 @@ def main():
 
     # Load data based on the selected LLM type
     if llm_type == "Small LLMs":
-        df = load_data_from_folder("Small_aggregated/")
+        df = load_data_from_folder("small_llms/")
         render_dashboard(df, "Small LLM Metrics Dashboard")
     else:
-        df = load_data_from_folder("Big_aggregated/")
+        df = load_data_from_folder("big_llms/")
         render_dashboard(df, "Big LLM Metrics Dashboard")
 
 if __name__ == "__main__":
