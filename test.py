@@ -111,7 +111,7 @@ def main():
 
     # Load data based on the selected LLM type
     if llm_type == "Small LLMs":
-        df = load_data_from_folder("Small_Aggregated/")
+        df = load_data_from_folder("Small_aggregated/")
         render_dashboard(df, "Small LLM Metrics Dashboard")
     else:
         df = load_data_from_folder("Big_aggregated/")
