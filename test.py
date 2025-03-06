@@ -17,6 +17,15 @@ def load_data_from_folder(folder_path):
             model_name = filename.replace("_aggregated_results.json", "")
             with open(os.path.join(folder_path, filename), "r") as f:
                 model_data = json.load(f)
+                # Invert perplexity to make lower values better
+                inverted_perplexity = 1 / model_data["perplexity"]
+                # Update combined_score with negative weight for perplexity
+                combined_score = (
+                    model_data["correctness"] * 0.4 +  # Correctness weight
+                    model_data["relevance"] * 0.3 +    # Relevance weight
+                    inverted_perplexity * 0.2 -        # Perplexity weight (inverted)
+                    model_data["resolution_time"] * 0.1 -  # Resolution time weight
+                )
                 # Extract metrics
                 metrics = {
                     "model": model_name,
@@ -24,7 +33,7 @@ def load_data_from_folder(folder_path):
                     "relevance": model_data["relevance"],
                     "perplexity": model_data["perplexity"],
                     "resolution_time": model_data["resolution_time"],
-                    "combined_score": model_data["combined_score"],
+                    "combined_score": combined_score,  # Updated combined_score
                     "cpu_%": model_data["cpu_%"],
                     "ram_%": model_data["ram_%"],
                     "gpu_%": model_data["gpu_%"],
