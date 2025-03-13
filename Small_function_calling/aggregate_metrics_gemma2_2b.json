@@ -1,0 +1,26 @@
+{
+  "model": "gemma2:2b",
+  "aggregate_metrics": {
+    "total_items": 400,
+    "parsing_success_rate": 0.9475,
+    "exact_function_name_rate": 0.7225,
+    "fuzzy_function_name_rate": 0.0125,
+    "functional_similarity_rate": 0.0637500000000001,
+    "combined_function_match_rate": 0.735,
+    "required_params_present_rate": 0.7175,
+    "params_correct_type_rate": 0.9425,
+    "no_extra_params_rate": 0.7575,
+    "exact_success_rate": 0.6525,
+    "fuzzy_success_rate": 0.0025,
+    "combined_success_rate": 0.655,
+    "correct_tool_retrieval_rate": 0.9125,
+    "correct_tool_first_rate": 0.71,
+    "average_rag_time": 0.17325843036174773,
+    "average_llm_time": 1.9492371362447738,
+    "average_total_time": 2.1224955666065215,
+    "average_fuzzy_score": 0.0981103165485306,
+    "average_functional_similarity": 0.3,
+    "average_description_similarity": 0.7000000000000001,
+    "indexing_time": 5.456956386566162
+  }
+}
