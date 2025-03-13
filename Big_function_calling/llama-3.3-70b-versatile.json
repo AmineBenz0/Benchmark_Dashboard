@@ -1,0 +1,81 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "aggregate_metrics": {
+    "total_items": 400,
+    "parsing_success_rate": 1.0,
+    "exact_function_name_rate": 0.295,
+    "fuzzy_function_name_rate": 0.0025,
+    "functional_similarity_rate": 0.025,
+    "combined_function_match_rate": 0.2975,
+    "required_params_present_rate": 0.3275,
+    "params_correct_type_rate": 0.995,
+    "no_extra_params_rate": 0.9525,
+    "exact_success_rate": 0.2925,
+    "fuzzy_success_rate": 0.0,
+    "combined_success_rate": 0.2925,
+    "correct_tool_retrieval_rate": 0.895,
+    "correct_tool_first_rate": 0.705,
+    "average_rag_time": 0.24883888840675353,
+    "average_llm_time": 12.189348334670067,
+    "average_total_time": 12.43818722307682,
+    "indexing_time": 16.80513048171997,
+    "average_fuzzy_score": 0.31720484071275434,
+    "average_description_similarity": 0.3460789404809475,
+    "fuzzy_match_threshold": 0.8
+  },
+  "detailed_results": [
+    {
+      "id": "simple_0",
+      "query": "Find the area of a triangle with a base of 10 units and height of 5 units.",
+      "expected_function": {
+        "name": "calculate_triangle_area",
+        "description": "Calculate the area of a triangle given its base and height.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "base": {
+              "type": "integer",
+              "description": "The base of the triangle."
+            },
+            "height": {
+              "type": "integer",
+              "description": "The height of the triangle."
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of measure (defaults to 'units' if not specified)"
+            }
+          },
+          "required": [
+            "base",
+            "height"
+          ]
+        }
+      },
+      "top_tools": [
+        "calc_area_triangle",
+        "calculate_triangle_area",
+        "calculate_area"
+      ],
+      "top_tool_similarities": [
+        0.6751723289489746,
+        0.652765154838562,
+        0.646949291229248
+      ],
+      "correct_tool_retrieved": true,
+      "correct_tool_rank": 1,
+      "llm_output": "{\"name\": \"calculate_triangle_area\", \"parameters\": {\"base\": 10, \"height\": 5, \"unit\": \"units\"}}",
+      "metrics": {
+        "function_name_correct": true,
+        "expected_name": "calculate_triangle_area",
+        "predicted_name": "calculate_triangle_area",
+        "fuzzy_name_match": true,
+        "fuzzy_score": 1.0,
+        "fuzzy_details": {
+          "sequence_ratio": 1.0,
+          "levenshtein_ratio": 1.0,
+          "normalized_match": 1.0,
+          "word_overlap": 1.0,
+          "combined_score": 1.0
+        },
+        "description_similarity": 

@@ -1,0 +1,26 @@
+{
+  "model": "qwen2.5:1.5B",
+  "aggregate_metrics": {
+    "total_items": 400,
+    "parsing_success_rate": 0.98,
+    "exact_function_name_rate": 0.74,
+    "fuzzy_function_name_rate": 0.0075,
+    "functional_similarity_rate": 0.06975000000000012,
+    "combined_function_match_rate": 0.7475,
+    "required_params_present_rate": 0.74,
+    "params_correct_type_rate": 0.975,
+    "no_extra_params_rate": 0.77,
+    "exact_success_rate": 0.665,
+    "fuzzy_success_rate": 0.0025,
+    "combined_success_rate": 0.6675,
+    "correct_tool_retrieval_rate": 0.9125,
+    "correct_tool_first_rate": 0.71,
+    "average_rag_time": 0.17808733224868775,
+    "average_llm_time": 1.3281322425603868,
+    "average_total_time": 1.5062195748090743,
+    "average_fuzzy_score": 0.10256122586428137,
+    "average_functional_similarity": 0.3,
+    "average_description_similarity": 0.7,
+    "indexing_time": 6.323909759521484
+  }
+}
